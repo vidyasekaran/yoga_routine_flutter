@@ -1,0 +1,42 @@
+i wan to change the coding logic myself, what code should i change if i want to add more yoga poses
+
+Showing where to add yoga poses. The data is in models.dart. Checking the current structure:
+Here’s where to add yoga poses. All pose data is in lib/models.dart.
+Where to add yoga poses
+File: lib/models.dart
+How to add poses
+Option 1: Add a pose to an existing body part
+Example: Add a new pose to "Lower Back"
+Create the pose object (around line 41-64):
+final myNewPose = YogaPose(  id: 'my_new_pose',           // Unique ID (use lowercase with underscores)  name: 'My New Pose',          // Display name  description: 'Description of what the pose does.',  // Instructions  imageAsset: 'assets/images/my-new-pose.jpg',  // Path to your image  durationSeconds: 30,          // Default duration in seconds);
+Add it to the body part's poses list (around line 114-137):
+BodyPart(  id: 'lower_back',  name: 'Lower Back',  description: 'Stretches and gentle twists for lower back relief.',  poses: [    childsPose,    catCow,    kneesToChest,    myNewPose,  // ← Add your new pose here  ],),
+Option 2: Add multiple poses to an existing body part
+Example: Add multiple poses to "Shoulder"
+Create a list of poses (around line 66-88):
+final myNewShoulderPoses = [  YogaPose(    id: 'pose1',    name: 'Pose 1',    description: 'Description here.',    imageAsset: 'assets/images/pose1.jpg',    durationSeconds: 30,  ),  YogaPose(    id: 'pose2',    name: 'Pose 2',    description: 'Description here.',    imageAsset: 'assets/images/pose2.jpg',    durationSeconds: 40,  ),];
+Add them to the body part:
+BodyPart(  id: 'shoulder',  name: 'Shoulder',  description: 'Exercises to relieve shoulder tension and improve mobility.',  poses: [    ...shoulderPoses,      // Existing poses    ...myNewShoulderPoses, // Your new poses  ],),
+Option 3: Create a new body part with poses
+Create poses for the new body part (around line 90-112):
+final hipPoses = [  YogaPose(    id: 'hip_opener',    name: 'Hip Opener',    description: 'Open your hips with this gentle stretch.',    imageAsset: 'assets/images/hip-opener.jpg',    durationSeconds: 45,  ),  YogaPose(    id: 'pigeon_pose',    name: 'Pigeon Pose',    description: 'Deep hip stretch in pigeon position.',    imageAsset: 'assets/images/pigeon-pose.jpg',    durationSeconds: 60,  ),];
+Add a new BodyPart to the bodyParts list (around line 114-137):
+final bodyParts = [  BodyPart(    id: 'lower_back',    name: 'Lower Back',    description: 'Stretches and gentle twists for lower back relief.',    poses: [childsPose, catCow, kneesToChest],  ),  BodyPart(    id: 'shoulder',    name: 'Shoulder',    description: 'Exercises to relieve shoulder tension and improve mobility.',    poses: shoulderPoses,  ),  BodyPart(    id: 'neck',    name: 'Neck',    description: 'Gentle stretches to release neck tension.',    poses: neckPoses,  ),  // ← Add your new body part here  BodyPart(    id: 'hips',    name: 'Hips',    description: 'Stretches to open and release hip tension.',    poses: hipPoses,  ),];
+Important notes
+Image files:
+Place images in assets/images/
+Use the exact filename in imageAsset (e.g., 'assets/images/my-pose.jpg')
+Supported formats: .jpg, .png, etc.
+Pose properties:
+id: Unique identifier (lowercase with underscores)
+name: Display name shown in the app
+description: Instructions shown during the workout
+imageAsset: Path to the image file
+durationSeconds: Default duration (users can adjust this)
+After adding poses:
+Run flutter pub get (usually not needed for code changes)
+Hot reload or restart the app
+The new poses will appear in the app
+Quick example: Adding "Warrior Pose" to Lower Back
+// 1. Add the pose definition (around line 64, after kneesToChest)final warriorPose = YogaPose(  id: 'warrior_pose',  name: 'Warrior Pose',  description: 'Stand in a lunge position with arms extended.',  imageAsset: 'assets/images/warrior-pose.jpg',  durationSeconds: 45,);// 2. Add it to Lower Back poses list (around line 119)BodyPart(  id: 'lower_back',  name: 'Lower Back',  description: 'Stretches and gentle twists for lower back relief.',  poses: [    childsPose,    catCow,    kneesToChest,    warriorPose,  // ← New pose added here  ],),
+That’s it. The pose will appear in the app after you save and hot reload.
