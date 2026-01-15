@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'home_screen.dart';
 
+/* This is my main app */
 void main() {
   runApp(const MyApp());
 }

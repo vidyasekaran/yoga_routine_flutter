@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'models.dart';
 
+/* Pose detail screen */
 class PoseDetailScreen extends StatelessWidget {
   final YogaPose pose;
 
@@ -10,9 +11,7 @@ class PoseDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(pose.name),
-      ),
+      appBar: AppBar(title: Text(pose.name)),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -34,16 +33,10 @@ class PoseDetailScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16),
                   color: Theme.of(context).colorScheme.primaryContainer,
                 ),
-                child: const Icon(
-                  Icons.self_improvement,
-                  size: 80,
-                ),
+                child: const Icon(Icons.self_improvement, size: 80),
               ),
             const SizedBox(height: 24),
-            Text(
-              'Duration',
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
+            Text('Duration', style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: 4),
             Text('${pose.durationSeconds} seconds'),
             const SizedBox(height: 24),
@@ -62,5 +55,3 @@ class PoseDetailScreen extends StatelessWidget {
     );
   }
 }
-
-
