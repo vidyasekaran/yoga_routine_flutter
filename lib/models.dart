@@ -61,7 +61,7 @@ final childsPose = [
     name: 'Child\'s Pose',
     description:
         'Sit back on your heels, fold forward, and rest your forehead on the mat.',
-    imageAsset: 'images/lowerback/child-pose.jpg',
+    imageAsset: 'assets/images/child-pose.jpg',
     durationSeconds: 30,
   ),
 
@@ -70,7 +70,7 @@ final childsPose = [
     name: 'Cat-Cow',
     description:
         'Move between arching your back (cow) and rounding it (cat) on hands and knees.',
-    imageAsset: 'images/lowerback/cat-cow.jpg',
+    imageAsset: 'assets/images/cat-cow.jpg',
     durationSeconds: 40,
   ),
 
@@ -78,7 +78,7 @@ final childsPose = [
     id: 'knees_to_chest',
     name: 'Knees-to-Chest',
     description: 'Lie on your back and pull your knees toward your chest.',
-    imageAsset: 'images/lowerback/knees-chest.jpg',
+    imageAsset: 'assets/images/knees-chest.jpg',
     durationSeconds: 30,
   ),
 
@@ -86,7 +86,7 @@ final childsPose = [
     id: 'cobra_pose',
     name: 'cobra_pose',
     description: '....',
-    imageAsset: 'images/lowerback/Bhujangasana-cobra.jpg',
+    imageAsset: 'assets/images/Bhujangasana-cobra.jpg',
     durationSeconds: 30,
   ),
 
@@ -94,7 +94,7 @@ final childsPose = [
     id: 'Setu-bandhasana',
     name: 'Setu-bandhasana',
     description: 'Lie on your back and pull your knees toward your chest.',
-    imageAsset: 'images/lowerback/Setu-bandhasana.jpg',
+    imageAsset: 'assets/images/Setu-bandhasana.jpg',
     durationSeconds: 30,
   ),
 
@@ -102,7 +102,7 @@ final childsPose = [
     id: 'Ardha_Matsyendrasana',
     name: 'Ardha_Matsyendrasana',
     description: 'Lie on your back and pull your knees toward your chest.',
-    imageAsset: 'images/lowerback/Ardha_Matsyendrasana.jpg',
+    imageAsset: 'assets/images/Ardha_Matsyendrasana.jpg',
     durationSeconds: 30,
   ),
 
@@ -110,7 +110,7 @@ final childsPose = [
     id: 'salabhasana-pose',
     name: 'salabhasana-pose',
     description: 'Lie on your back and pull your knees toward your chest.',
-    imageAsset: 'images/lowerback/salabhasana-pose.jpg',
+    imageAsset: 'assets/images/salabhasana-pose.jpg',
     durationSeconds: 30,
   ),
 
@@ -118,14 +118,14 @@ final childsPose = [
     id: 'viparita-karani',
     name: 'viparita-karani',
     description: 'Lie on your back and pull your knees toward your chest.',
-    imageAsset: 'images/lowerback/Viparita-karani.jpg',
+    imageAsset: 'assets/images/viparita.jpg',
     durationSeconds: 30,
   ),
   YogaPose(
     id: 'downward-facing-dog',
     name: 'downward-facing-dog',
     description: 'Lie on your back and pull your knees toward your chest.',
-    imageAsset: 'images/lowerback/downward-facing-dog.jpg',
+    imageAsset: 'assets/images/downward-facing-dog.jpg',
     durationSeconds: 30,
   ),
 ];
@@ -136,7 +136,7 @@ final shoulderPoses = [
     name: 'Shoulder Roll',
     description:
         'Roll your shoulders forward and backward in circular motions.',
-    imageAsset: 'images/shoulder-rolls.jpg',
+    imageAsset: 'assets/images/shoulder-rolls.jpg',
     durationSeconds: 30,
   ),
   YogaPose(
@@ -144,14 +144,14 @@ final shoulderPoses = [
     name: 'Thread the Needle',
     description:
         'Thread one arm under the body while on hands and knees, then switch sides.',
-    imageAsset: 'images/thread-needle.jpg',
+    imageAsset: 'assets/images/thread-needle.jpg',
     durationSeconds: 40,
   ),
   YogaPose(
     id: 'eagle_arms',
     name: 'Eagle Arms',
     description: 'Wrap one arm under the other and hold, then switch sides.',
-    imageAsset: 'images/eagle-arms.jpg',
+    imageAsset: 'assets/images/eagle-arms.jpg',
     durationSeconds: 30,
   ),
 ];
