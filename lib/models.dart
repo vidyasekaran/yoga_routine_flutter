@@ -194,7 +194,7 @@ final lowerBack = [
     name: 'Spinal Twist',
     description:
         'Gently twists the spine to release tension and improve flexibility in the back.',
-    imageAsset: 'assets/images/spinal_twist.jpg',
+    imageAsset: 'assets/images/spinal-twist.jpg',
     durationSeconds: 30,
   ),
   YogaPose(
