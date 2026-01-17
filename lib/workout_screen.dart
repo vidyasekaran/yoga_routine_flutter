@@ -23,7 +23,7 @@ class WorkoutScreen extends StatefulWidget {
 
 class _WorkoutScreenState extends State<WorkoutScreen> {
   Timer? _timer;
-  Timer? _transitionTimer;  
+  Timer? _transitionTimer;
   int _currentPoseIndex = 0;
   int _secondsRemaining = 0;
   bool _isPaused = false;
@@ -36,7 +36,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
     }
     return null;
   }
-  
+
   YogaPose? get _nextPose => _currentPoseIndex < widget.poses.length - 1
       ? widget.poses[_currentPoseIndex + 1]
       : null;
@@ -57,33 +57,33 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
     // Cancel any existing timer first
     _timer?.cancel();
     _timer = null;
-    
+
     // Safety check: ensure we have a valid pose
     if (_currentPoseIndex < 0 || _currentPoseIndex >= widget.poses.length) {
       return;
     }
-    
+
     if (_currentPose == null) return;
-    
+
     // Reset state for new pose
     setState(() {
       _secondsRemaining = _currentPose!.durationSeconds;
       _isPaused = false;
     });
-    
+
     // Start the timer
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (!mounted) {
         timer.cancel();
         return;
       }
-      
+
       if (!_isPaused && !_isTransitioning) {
         setState(() {
           if (_secondsRemaining > 0) {
             _secondsRemaining--;
           }
-          
+
           if (_secondsRemaining <= 0) {
             timer.cancel(); // Cancel timer before advancing
             _advanceToNextPose();
@@ -94,61 +94,59 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
   }
 
   Future<void> _advanceToNextPose() async {
-  // Cancel any existing timers
-  _timer?.cancel();
-  _timer = null;
-  _transitionTimer?.cancel();
-  _transitionTimer = null;
-
-  if (_currentPoseIndex < widget.poses.length - 1) {
-    // Show transition animation + start transition countdown
-    if (mounted) {
-      final totalTransitionSeconds =
-          (widget.transitionDurationMs / 1000).ceil();
-
-      setState(() {
-        _isTransitioning = true;
-        _transitionSecondsRemaining = totalTransitionSeconds;
-      });
-
-      _transitionTimer = Timer.periodic(const Duration(seconds: 1), (t) {
-        if (!mounted) {
-          t.cancel();
-          return;
-        }
-        setState(() {
-          _transitionSecondsRemaining--;
-          if (_transitionSecondsRemaining <= 0) {
-            t.cancel();
-          }
-        });
-      });
-    }
-
-    // Wait for full transition duration
-    await Future.delayed(
-      Duration(milliseconds: widget.transitionDurationMs),
-    );
-
-    if (mounted) {
-      setState(() {
-        _currentPoseIndex++;
-        _isTransitioning = false;
-      });
-      _startPose();
-    }
-  } else {
+    // Cancel any existing timers
     _timer?.cancel();
-    _transitionTimer?.cancel();
     _timer = null;
+    _transitionTimer?.cancel();
     _transitionTimer = null;
-    if (mounted) {
-      _showCompletionDialog();
+
+    if (_currentPoseIndex < widget.poses.length - 1) {
+      // Show transition animation + start transition countdown
+      if (mounted) {
+        final totalTransitionSeconds = (widget.transitionDurationMs / 1000)
+            .ceil();
+
+        setState(() {
+          _isTransitioning = true;
+          _transitionSecondsRemaining = totalTransitionSeconds;
+        });
+
+        _transitionTimer = Timer.periodic(const Duration(seconds: 1), (t) {
+          if (!mounted) {
+            t.cancel();
+            return;
+          }
+          setState(() {
+            _transitionSecondsRemaining--;
+            if (_transitionSecondsRemaining <= 0) {
+              t.cancel();
+            }
+          });
+        });
+      }
+
+      // Wait for full transition duration
+      await Future.delayed(Duration(milliseconds: widget.transitionDurationMs));
+
+      if (mounted) {
+        setState(() {
+          _currentPoseIndex++;
+          _isTransitioning = false;
+        });
+        _startPose();
+      }
+    } else {
+      _timer?.cancel();
+      _transitionTimer?.cancel();
+      _timer = null;
+      _transitionTimer = null;
+      if (mounted) {
+        _showCompletionDialog();
+      }
     }
   }
-}
 
-/*
+  /*
   Future<void> _advanceToNextPose() async {
     // Cancel any existing timer
     _timer?.cancel();
@@ -212,6 +210,16 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
     );
   }
 
+  /*
+  void _skipPose() {
+    if (_isTransitioning) return; // don’t allow skipping during transition
+
+    _timer?.cancel();
+    _transitionTimer?.cancel();
+
+    _advanceToNextPose(); // use your existing transition logic
+  }
+*/
   void _togglePause() {
     setState(() {
       _isPaused = !_isPaused;
@@ -235,11 +243,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
   Widget build(BuildContext context) {
     final pose = _currentPose;
     if (pose == null) {
-      return Scaffold(
-        body: Center(
-          child: Text('Error: No pose available'),
-        ),
-      );
+      return Scaffold(body: Center(child: Text('Error: No pose available')));
     }
 
     return Scaffold(
@@ -256,21 +260,22 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                   Text(
                     pose.name,
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                      fontWeight: FontWeight.bold,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 8),
                   Text(
                     'Hold this pose.',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: Colors.grey[600],
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyLarge?.copyWith(color: Colors.grey[600]),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 32),
+
                   // Pose image
-                  Expanded(
+                  /*Expanded(
                     child: Center(
                       child: pose.imageAsset != null
                           ? ClipRRect(
@@ -307,15 +312,39 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                               ),
                             ),
                     ),
+                  ),*/
+                  Expanded(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: AspectRatio(
+                        aspectRatio: 3 / 4, // ideal for human body poses
+                        child: Image.asset(
+                          pose.imageAsset!,
+                          fit: BoxFit.contain, // ✅ no cropping
+                          alignment: Alignment.center,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              color: Colors.grey[200],
+                              child: const Icon(
+                                Icons.self_improvement,
+                                size: 120,
+                                color: Colors.grey,
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
                   ),
+
                   const SizedBox(height: 32),
                   // Timer display
                   Text(
                     '${_secondsRemaining}s',
                     style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 72,
-                        ),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 72,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 16),
@@ -323,17 +352,17 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                   if (_nextPose != null)
                     Text(
                       'Next: ${_nextPose!.name} — ${_nextPose!.durationSeconds}s',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: Colors.grey[600],
-                          ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyLarge?.copyWith(color: Colors.grey[600]),
                       textAlign: TextAlign.center,
                     )
                   else
                     Text(
                       'Last pose',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: Colors.grey[600],
-                          ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyLarge?.copyWith(color: Colors.grey[600]),
                       textAlign: TextAlign.center,
                     ),
                   const SizedBox(height: 48),
@@ -350,6 +379,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                           child: Text(_isPaused ? 'Resume' : 'Pause'),
                         ),
                       ),
+
                       const SizedBox(width: 16),
                       Expanded(
                         child: OutlinedButton(
@@ -382,26 +412,25 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                 duration: const Duration(milliseconds: 300),
                 child: Container(
                   color: Colors.white,
-                 child: Center(
-  child: Column(
-    mainAxisSize: MainAxisSize.min,
-    children: [
-      SvgPicture.asset(
-        'assets/images/pose-transition.svg',
-        width: 200,
-        height: 200,
-        fit: BoxFit.contain,
-      ),
-      const SizedBox(height: 16),
-      Text(
-        '${_transitionSecondsRemaining}s',
-        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
-      ),
-    ],
-  ),
-),
+                  child: Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/images/pose-transition.svg',
+                          width: 200,
+                          height: 200,
+                          fit: BoxFit.contain,
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          '${_transitionSecondsRemaining}s',
+                          style: Theme.of(context).textTheme.headlineMedium
+                              ?.copyWith(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
           ],

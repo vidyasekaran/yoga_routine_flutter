@@ -31,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  /*
   void _updateGlobalTimer(int delta) {
     setState(() {
       _globalTimerSeconds = (_globalTimerSeconds + delta).clamp(10, 300);
@@ -110,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
+*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(

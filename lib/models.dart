@@ -57,32 +57,6 @@ class BodyPart {
 // Sample poses matching the UI with correct image paths
 final childsPose = [
   YogaPose(
-    id: 'childs_pose',
-    name: 'Child\'s Pose',
-    description:
-        'Sit back on your heels, fold forward, and rest your forehead on the mat.',
-    imageAsset: 'assets/images/child-pose.jpg',
-    durationSeconds: 30,
-  ),
-
-  YogaPose(
-    id: 'cat_cow',
-    name: 'Cat-Cow',
-    description:
-        'Move between arching your back (cow) and rounding it (cat) on hands and knees.',
-    imageAsset: 'assets/images/cat-cow.jpg',
-    durationSeconds: 40,
-  ),
-
-  YogaPose(
-    id: 'knees_to_chest',
-    name: 'Knees-to-Chest',
-    description: 'Lie on your back and pull your knees toward your chest.',
-    imageAsset: 'assets/images/knees-chest.jpg',
-    durationSeconds: 30,
-  ),
-
-  YogaPose(
     id: 'cobra_pose',
     name: 'cobra_pose',
     description: '....',
@@ -91,26 +65,10 @@ final childsPose = [
   ),
 
   YogaPose(
-    id: 'Setu-bandhasana',
-    name: 'Setu-bandhasana',
-    description: 'Lie on your back and pull your knees toward your chest.',
-    imageAsset: 'assets/images/Setu-bandhasana.jpg',
-    durationSeconds: 30,
-  ),
-
-  YogaPose(
     id: 'Ardha_Matsyendrasana',
     name: 'Ardha_Matsyendrasana',
     description: 'Lie on your back and pull your knees toward your chest.',
     imageAsset: 'assets/images/Ardha_Matsyendrasana.jpg',
-    durationSeconds: 30,
-  ),
-
-  YogaPose(
-    id: 'salabhasana-pose',
-    name: 'salabhasana-pose',
-    description: 'Lie on your back and pull your knees toward your chest.',
-    imageAsset: 'assets/images/salabhasana-pose.jpg',
     durationSeconds: 30,
   ),
 
@@ -154,6 +112,108 @@ final shoulderPoses = [
     imageAsset: 'assets/images/eagle-arms.jpg',
     durationSeconds: 30,
   ),
+
+  YogaPose(
+    id: 'shoulder_updown',
+    name: 'Shoulder updown',
+    description: 'Thread the needle pose.',
+    imageAsset: 'assets/images/shoulder-updown.jpg',
+    durationSeconds: 30,
+  ),
+];
+
+final puppyPose = [
+  YogaPose(
+    id: 'puppy_pose',
+    name: 'Puppy Pose',
+    description: 'Slowly turn your head to one side, hold, then switch.',
+    imageAsset: 'assets/images/puppy-pose.png',
+    durationSeconds: 30,
+  ),
+];
+
+final lowerBack = [
+  YogaPose(
+    id: 'childs_pose',
+    name: 'Child\'s Pose',
+    description:
+        'Gently stretches the spine and relaxes the lower back and hips.',
+    imageAsset: 'assets/images/child-pose.jpg',
+    durationSeconds: 30,
+  ),
+  YogaPose(
+    id: 'cat_cow',
+    name: 'Cat-Cow',
+    description:
+        'Improves spinal mobility and relieves stiffness in the lower back.',
+    imageAsset: 'assets/images/cat-cow.jpg',
+    durationSeconds: 40,
+  ),
+  YogaPose(
+    id: 'parsva_balasana',
+    name: 'Parsva Balasana',
+    description:
+        'Releases tension in the spine, shoulders, and lower back through a gentle twist.',
+    imageAsset: 'assets/images/parsva_balasana.jpg',
+    durationSeconds: 30,
+  ),
+  YogaPose(
+    id: 'knees_to_chest',
+    name: 'Knees-to-Chest',
+    description:
+        'Decompresses the lower spine and relieves lower back tightness.',
+    imageAsset: 'assets/images/knees-chest.jpg',
+    durationSeconds: 30,
+  ),
+
+  YogaPose(
+    id: 'happy-baby-pose',
+    name: 'happy-baby-pose',
+    description: 'Relaxes the lower back while opening the hips and pelvis.',
+    imageAsset: 'assets/images/happy-baby-pose.webp',
+    durationSeconds: 30,
+  ),
+  YogaPose(
+    id: 'Setu-bandhasana',
+    name: 'Setu-bandhasana',
+    description:
+        'Strengthens the lower back and glutes while improving spinal support.',
+    imageAsset: 'assets/images/Setu-bandhasana.jpg',
+    durationSeconds: 30,
+  ),
+  YogaPose(
+    id: 'salabhasana-pose',
+    name: 'salabhasana-pose',
+    description:
+        'Builds strength in the lower back muscles and improves posture.',
+    imageAsset: 'assets/images/salabhasana-pose.jpg',
+    durationSeconds: 30,
+  ),
+  YogaPose(
+    id: 'spinal_twist',
+    name: 'Spinal Twist',
+    description:
+        'Gently twists the spine to release tension and improve flexibility in the back.',
+    imageAsset: 'assets/images/spinal_twist.jpg',
+    durationSeconds: 30,
+  ),
+  YogaPose(
+    id: 'supine_spinal_twist',
+    name: 'SupineSpinal Twist',
+    description:
+        'Gently twists the spine to release lower back tension and improve flexibility.',
+    imageAsset: 'assets/images/supine-spinal-twist.jpeg',
+    durationSeconds: 30,
+  ),
+
+  YogaPose(
+    id: 'malasana-pose',
+    name: 'malasana-pose',
+    description:
+        'Opens the hips and releases accumulated tension in the lower back.',
+    imageAsset: 'assets/images/malasana-asana-yoga.jpg',
+    durationSeconds: 30,
+  ),
 ];
 
 final neckPoses = [
@@ -178,6 +238,22 @@ final neckPoses = [
     imageAsset: 'assets/images/chin-tuck.jpg',
     durationSeconds: 30,
   ),
+
+  YogaPose(
+    id: 'neck-roll',
+    name: 'Neck Roll',
+    description: 'Gently tuck your chin toward your chest and hold.',
+    imageAsset: 'assets/images/neck-roll.jpg',
+    durationSeconds: 30,
+  ),
+
+  YogaPose(
+    id: 'neck-updown',
+    name: 'Neck Up Down',
+    description: 'Gently tuck your chin toward your chest and hold.',
+    imageAsset: 'assets/images/neck-updown.jpg',
+    durationSeconds: 30,
+  ),
 ];
 
 final bodyParts = [
@@ -185,8 +261,15 @@ final bodyParts = [
     id: 'lower_back',
     name: 'Lower Back',
     description: 'Stretches and gentle twists for lower back relief.',
-    poses: childsPose,
+    poses: lowerBack,
   ),
+  BodyPart(
+    id: 'upper_back',
+    name: 'Upper Back',
+    description: 'Stretches and gentle twists for lower back relief.',
+    poses: puppyPose,
+  ),
+
   BodyPart(
     id: 'shoulder',
     name: 'Shoulder',
