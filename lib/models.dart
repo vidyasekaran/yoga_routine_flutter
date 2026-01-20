@@ -3,7 +3,9 @@ class YogaPose {
   final String name;
   final String description;
   final String? imageAsset;
-  int durationSeconds; // Made mutable for global timer adjustment
+  int durationSeconds;
+  final String? videoAsset;
+  // Made mutable for global timer adjustment
 
   /* These are yogapose model */
 
@@ -12,6 +14,7 @@ class YogaPose {
     required this.name,
     required this.description,
     this.imageAsset,
+    this.videoAsset,
     required this.durationSeconds,
   });
 
@@ -21,6 +24,7 @@ class YogaPose {
       name: name,
       description: description,
       imageAsset: imageAsset,
+      videoAsset: videoAsset,
       durationSeconds: durationSeconds ?? this.durationSeconds,
     );
   }
@@ -88,6 +92,100 @@ final childsPose = [
   ),
 ];
 
+final suryanamaskarPoses = [
+  YogaPose(
+    id: 'surya-1',
+    name: 'Suryanamaskar1',
+    description: 'Sun Salutation Routine',
+    imageAsset: 'assets/images/surya-1.jpg',
+    durationSeconds: 30,
+  ),
+  YogaPose(
+    id: 'surya-2',
+    name: 'Suryanamaskar2',
+    description: 'Sun Salutation Routine',
+    imageAsset: 'assets/images/surya-2.jpg',
+    durationSeconds: 30,
+  ),
+  YogaPose(
+    id: 'surya-3',
+    name: 'Suryanamaskar3',
+    description: 'Sun Salutation Routine',
+    imageAsset: 'assets/images/surya-3.webp',
+    durationSeconds: 30,
+  ),
+  YogaPose(
+    id: 'surya-4',
+    name: 'Suryanamaskar4',
+    description: 'Sun Salutation Routine',
+    imageAsset: 'assets/images/surya-4.webp',
+    durationSeconds: 30,
+  ),
+  YogaPose(
+    id: 'surya-5',
+    name: 'Suryanamaskar5',
+    description: 'Sun Salutation Routine',
+    imageAsset: 'assets/images/surya-5.jpg',
+    durationSeconds: 30,
+  ),
+  YogaPose(
+    id: 'surya-6',
+    name: 'Suryanamaskar6',
+    description: 'Sun Salutation Routine',
+    imageAsset: 'assets/images/surya-6.webp',
+    durationSeconds: 30,
+  ),
+  YogaPose(
+    id: 'surya-7',
+    name: 'Suryanamaskar7',
+    description: 'Sun Salutation Routine',
+    imageAsset: 'assets/images/surya-7.jpg',
+    durationSeconds: 30,
+  ),
+  YogaPose(
+    id: 'surya-8',
+    name: 'Suryanamaskar8',
+    description: 'Sun Salutation Routine',
+    imageAsset: 'assets/images/surya-8.webp',
+    durationSeconds: 30,
+  ),
+  YogaPose(
+    id: 'surya-9',
+    name: 'Suryanamaskar9',
+    description: 'Sun Salutation Routine',
+    imageAsset: 'assets/images/surya-9.jpg',
+    durationSeconds: 30,
+  ),
+  YogaPose(
+    id: 'surya-10',
+    name: 'Suryanamaskar10',
+    description: 'Sun Salutation Routine',
+    imageAsset: 'assets/images/surya-10.jpg',
+    durationSeconds: 30,
+  ),
+  YogaPose(
+    id: 'surya-11',
+    name: 'Suryanamaskar11',
+    description: 'Sun Salutation Routine',
+    imageAsset: 'assets/images/surya-11.jpg',
+    durationSeconds: 30,
+  ),
+  YogaPose(
+    id: 'surya-12',
+    name: 'Suryanamaskar12',
+    description: 'Sun Salutation Routine',
+    imageAsset: 'assets/images/surya-12.jpg',
+    durationSeconds: 30,
+  ),
+  YogaPose(
+    id: 'surya-complete',
+    name: 'Suryanamaskar complete',
+    description: 'Sun Salutation Routine',
+    imageAsset: 'assets/images/surya-complete.webp',
+    durationSeconds: 30,
+  ),
+];
+
 final shoulderPoses = [
   YogaPose(
     id: 'shoulder_roll',
@@ -132,7 +230,59 @@ final puppyPose = [
   ),
 ];
 
+final enerization = [
+  YogaPose(
+    id: 'energization',
+    name: 'Enerization Routine',
+    description: 'Slowly turn your head to one side, hold, then switch.',
+    videoAsset: 'assets/videos/yssenergization.mp4',
+    durationSeconds: 845,
+  ),
+];
+
 final lowerBack = [
+  YogaPose(
+    id: 'surya-2',
+    name: 'Suryanamaskar2',
+    description: 'Sun Salutation Routine',
+    imageAsset: 'assets/images/surya-2.jpg',
+    durationSeconds: 30,
+  ),
+  YogaPose(
+    id: 'surya-3',
+    name: 'Suryanamaskar3',
+    description: 'Sun Salutation Routine',
+    imageAsset: 'assets/images/surya-3.webp',
+    durationSeconds: 30,
+  ),
+  YogaPose(
+    id: 'surya-4',
+    name: 'Suryanamaskar4',
+    description: 'Sun Salutation Routine',
+    imageAsset: 'assets/images/surya-4.webp',
+    durationSeconds: 30,
+  ),
+  YogaPose(
+    id: 'surya-5',
+    name: 'Suryanamaskar5',
+    description: 'Sun Salutation Routine',
+    imageAsset: 'assets/images/surya-5.jpg',
+    durationSeconds: 30,
+  ),
+  YogaPose(
+    id: 'surya-7',
+    name: 'Suryanamaskar7',
+    description: 'Sun Salutation Routine',
+    imageAsset: 'assets/images/surya-7.jpg',
+    durationSeconds: 30,
+  ),
+  YogaPose(
+    id: 'surya-8',
+    name: 'Suryanamaskar8',
+    description: 'Sun Salutation Routine',
+    imageAsset: 'assets/images/surya-8.webp',
+    durationSeconds: 30,
+  ),
   YogaPose(
     id: 'childs_pose',
     name: 'Child\'s Pose',
@@ -281,5 +431,17 @@ final bodyParts = [
     name: 'Neck',
     description: 'Gentle stretches to release neck tension.',
     poses: neckPoses,
+  ),
+  BodyPart(
+    id: 'suryanamaskar',
+    name: 'suryanamaskar',
+    description: 'suryanamaskar Routine',
+    poses: suryanamaskarPoses,
+  ),
+  BodyPart(
+    id: 'energization',
+    name: 'energization',
+    description: 'YSS Energization Routine',
+    poses: enerization,
   ),
 ];

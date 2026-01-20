@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:video_player/video_player.dart';
 
 import 'models.dart';
 
@@ -29,6 +30,29 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
   bool _isPaused = false;
   bool _isTransitioning = false;
   int _transitionSecondsRemaining = 0; // ← add this
+  VideoPlayerController? _videoController;
+  bool _isVideoLoading = true;
+
+  Future<void> _loadVideo(YogaPose pose) async {
+    if (pose.videoAsset == null) return;
+
+    setState(() {
+      _isVideoLoading = true;
+    });
+
+    _videoController?.dispose();
+
+    _videoController = VideoPlayerController.asset(pose.videoAsset!);
+    await _videoController!.initialize();
+
+    _videoController!
+      ..setLooping(true)
+      ..play();
+
+    setState(() {
+      _isVideoLoading = false;
+    });
+  }
 
   YogaPose? get _currentPose {
     if (_currentPoseIndex >= 0 && _currentPoseIndex < widget.poses.length) {
@@ -65,6 +89,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
 
     if (_currentPose == null) return;
 
+    _loadVideo(_currentPose!);
     // Reset state for new pose
     setState(() {
       _secondsRemaining = _currentPose!.durationSeconds;
@@ -146,50 +171,6 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
     }
   }
 
-  /*
-  Future<void> _advanceToNextPose() async {
-    // Cancel any existing timer
-    _timer?.cancel();
-    _timer = null;
-    
-    if (_currentPoseIndex < widget.poses.length - 1) {
-      // Show transition animation
-      if (mounted) {
-
-        final totalTransitionSeconds =
-          (widget.transitionDurationMs / 1000).ceil();
-
-
-        setState(() {
-          _isTransitioning = true;
-          _transitionSecondsRemaining = totalTransitionSeconds;
-
-        });
-      }
-
-      // Wait for transition animation (configurable duration)
-      await Future.delayed(Duration(milliseconds: widget.transitionDurationMs));
-
-      // Move to next pose
-      _transitionTimer = Timer.periodic(const Duration(seconds: 1), (t) {
-
-      if (!mounted) {
-        setState(() {
-          _currentPoseIndex++;
-          _isTransitioning = false;
-        });
-        // Start the timer for the new pose (this will set _secondsRemaining)
-        _startPose();
-      }
-    } else {
-      _timer?.cancel();
-      _timer = null;
-      if (mounted) {
-        _showCompletionDialog();
-      }
-    }
-  }*/
-
   void _showCompletionDialog() {
     showDialog<void>(
       context: context,
@@ -210,16 +191,6 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
     );
   }
 
-  /*
-  void _skipPose() {
-    if (_isTransitioning) return; // don’t allow skipping during transition
-
-    _timer?.cancel();
-    _transitionTimer?.cancel();
-
-    _advanceToNextPose(); // use your existing transition logic
-  }
-*/
   void _togglePause() {
     setState(() {
       _isPaused = !_isPaused;
@@ -256,102 +227,67 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // Pose name and instruction
-                  Text(
-                    pose.name,
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
+                  if (_isVideoLoading) ...[
+                    // Pose name and instruction
+                    Text(
+                      pose.name,
+                      style: Theme.of(context).textTheme.headlineMedium
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Hold this pose.',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.bodyLarge?.copyWith(color: Colors.grey[600]),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 32),
 
-                  // Pose image
-                  /*Expanded(
-                    child: Center(
-                      child: pose.imageAsset != null
-                          ? ClipRRect(
-                              borderRadius: BorderRadius.circular(16),
-                              child: Image.asset(
-                                pose.imageAsset!,
-                                fit: BoxFit.contain,
-                                errorBuilder: (context, error, stackTrace) {
-                                  return Container(
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(16),
-                                      color: Colors.grey[200],
-                                    ),
-                                    child: const Icon(
-                                      Icons.self_improvement,
-                                      size: 120,
-                                      color: Colors.grey,
-                                    ),
-                                  );
-                                },
-                              ),
-                            )
-                          : Container(
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
-                                color: Colors.grey[200],
-                              ),
-                              child: const Icon(
-                                Icons.self_improvement,
-                                size: 120,
-                                color: Colors.grey,
-                              ),
-                            ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Hold this pose.',
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyLarge?.copyWith(color: Colors.grey[600]),
+                      textAlign: TextAlign.center,
                     ),
-                  ),*/
+                    const SizedBox(height: 32),
+                    // Timer display
+                    Text(
+                      '${_secondsRemaining}s',
+                      style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 72,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                  const SizedBox(height: 16),
                   Expanded(
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(16),
-                      child: AspectRatio(
-                        aspectRatio: 3 / 4, // ideal for human body poses
-                        child: Image.asset(
-                          pose.imageAsset!,
-                          fit: BoxFit.contain, // ✅ no cropping
-                          alignment: Alignment.center,
-                          errorBuilder: (context, error, stackTrace) {
-                            return Container(
-                              color: Colors.grey[200],
-                              child: const Icon(
-                                Icons.self_improvement,
-                                size: 120,
-                                color: Colors.grey,
-                              ),
-                            );
-                          },
-                        ),
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          // Video or image
+                          if (_videoController != null &&
+                              _videoController!.value.isInitialized)
+                            AspectRatio(
+                              aspectRatio: _videoController!.value.aspectRatio,
+                              child: VideoPlayer(_videoController!),
+                            )
+                          else if (pose.imageAsset != null)
+                            Image.asset(pose.imageAsset!, fit: BoxFit.contain),
+
+                          // Loading indicator
+                          if (_isVideoLoading)
+                            const Positioned(
+                              bottom: 16,
+                              left: 16,
+                              right: 16,
+                              child: LinearProgressIndicator(),
+                            ),
+                        ],
                       ),
                     ),
                   ),
 
-                  const SizedBox(height: 32),
-                  // Timer display
-                  Text(
-                    '${_secondsRemaining}s',
-                    style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 72,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 16),
-                  // Next pose indicator
                   if (_nextPose != null)
                     Text(
-                      'Next: ${_nextPose!.name} — ${_nextPose!.durationSeconds}s',
+                      'Next: ${_nextPose?.name} — ${_nextPose?.durationSeconds}s',
                       style: Theme.of(
                         context,
                       ).textTheme.bodyLarge?.copyWith(color: Colors.grey[600]),
@@ -365,6 +301,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                       ).textTheme.bodyLarge?.copyWith(color: Colors.grey[600]),
                       textAlign: TextAlign.center,
                     ),
+
                   const SizedBox(height: 48),
                   // Control buttons
                   Row(
