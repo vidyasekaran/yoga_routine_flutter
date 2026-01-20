@@ -283,6 +283,15 @@ final lowerBack = [
     imageAsset: 'assets/images/surya-8.webp',
     durationSeconds: 30,
   ),
+
+  YogaPose(
+    id: 'parsva_balasana',
+    name: 'Parsva Balasana',
+    description:
+        'Releases tension in the spine, shoulders, and lower back through a gentle twist.',
+    imageAsset: 'assets/images/parsva_balasana.jpg',
+    durationSeconds: 30,
+  ),
   YogaPose(
     id: 'childs_pose',
     name: 'Child\'s Pose',
@@ -300,11 +309,10 @@ final lowerBack = [
     durationSeconds: 40,
   ),
   YogaPose(
-    id: 'parsva_balasana',
-    name: 'Parsva Balasana',
-    description:
-        'Releases tension in the spine, shoulders, and lower back through a gentle twist.',
-    imageAsset: 'assets/images/parsva_balasana.jpg',
+    id: 'cobra_pose',
+    name: 'cobra_pose',
+    description: '....',
+    imageAsset: 'assets/images/Bhujangasana-cobra.jpg',
     durationSeconds: 30,
   ),
   YogaPose(
