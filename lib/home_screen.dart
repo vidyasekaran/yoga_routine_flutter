@@ -14,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   BodyPart? _selectedBodyPart;
   int _globalTimerSeconds = 30; // Global timer for all poses
-  int _transitionTimerSeconds = 1000; // Transition timer in milliseconds
+  int _transitionTimerSeconds = 30; // Transition timer in milliseconds
 
   @override
   void initState() {
@@ -85,6 +85,7 @@ class BodyPartDetailScreen extends StatefulWidget {
 class _BodyPartDetailScreenState extends State<BodyPartDetailScreen> {
   late BodyPart _bodyPart;
   int _globalTimerSeconds = 30;
+
   int _transitionTimerMs = 1000;
 
   @override
@@ -180,9 +181,10 @@ class _BodyPartDetailScreenState extends State<BodyPartDetailScreen> {
                   const SizedBox(height: 8),
                   _timerRow(
                     label: 'Transition',
-                    value: '${(_transitionTimerMs / 1000).toStringAsFixed(1)}s',
-                    onMinus: () => _updateTransitionTimer(-100),
-                    onPlus: () => _updateTransitionTimer(100),
+                    //value: '${(_transitionTimerMs / 1000).toStringAsFixed(1)}s',
+                    value: '${(_transitionTimerMs / 100)}s',
+                    onMinus: () => _updateTransitionTimer(-500),
+                    onPlus: () => _updateTransitionTimer(500),
                   ),
                 ],
               ),

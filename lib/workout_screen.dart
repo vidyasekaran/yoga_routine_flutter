@@ -15,7 +15,7 @@ class WorkoutScreen extends StatefulWidget {
     super.key,
     required this.bodyPart,
     required this.poses,
-    this.transitionDurationMs = 1000,
+    this.transitionDurationMs = 10000,
   });
 
   @override
@@ -128,8 +128,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
     if (_currentPoseIndex < widget.poses.length - 1) {
       // Show transition animation + start transition countdown
       if (mounted) {
-        final totalTransitionSeconds = (widget.transitionDurationMs / 1000)
-            .ceil();
+        final totalTransitionSeconds = (widget.transitionDurationMs).ceil();
 
         setState(() {
           _isTransitioning = true;
